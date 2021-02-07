@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import loginRouter from './login'
+import homeRouter from './home'
 
 Vue.use(VueRouter)
 
@@ -14,7 +15,7 @@ const defaultRouter = [{
   redirect: '/login'
 }
 ]
-const routes = defaultRouter.concat(loginRouter)
+const routes = defaultRouter.concat(loginRouter, homeRouter)
 
 const router = new VueRouter({
   mode: 'history', // hash是访问带#号

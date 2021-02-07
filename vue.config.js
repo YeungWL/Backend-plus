@@ -181,13 +181,13 @@ module.exports = {
     }
   },
   // transpileDependencies: ['vuex-persist'],
-  // pluginOptions: {
-  //   'style-resources-loader': {
-  //     preProcessor: 'less',
-  //     patterns: [
-  //       path.resolve(__dirname, './src/style/mixin.less'),
-  //       path.resolve(__dirname, './src/style/variable.less')
-  //     ]
-  //   }
-  // }
+  pluginOptions: {
+    'style-resources-loader': {
+      preProcessor: 'less',
+      patterns: [
+        // path.resolve(__dirname, './src/style/mixin.less'),
+        path.resolve(__dirname, './src/styles/theme.less')
+      ]
+    }
+  }
 }

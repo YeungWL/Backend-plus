@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <Layout v-if="$route.meta.isAuth"></Layout>
+    <Layout v-if="$route.meta.isAuth">
+      <router-view />
+    </Layout>
     <template v-else>
       <router-view />
     </template>

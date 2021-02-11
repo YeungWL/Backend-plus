@@ -1,9 +1,9 @@
 <!--
  * @Date: 2021-02-04 00:12:07
  * @LastEditors: Yeung
- * @LastEditTime: 2021-02-04 00:13:33
+ * @LastEditTime: 2021-02-12 01:07:05
  * @Description: 首页
 -->
 <template>
-  <div>首页</div>
+  <MyPage>首页</MyPage>
 </template>

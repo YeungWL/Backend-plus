@@ -22,3 +22,6 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### 配置style-resources-loader来配置全局字典样式
+注：搭配vue-cli-plugin-style-resources-loader一起使用

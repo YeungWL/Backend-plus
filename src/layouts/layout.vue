@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-02-01 23:55:59
  * @LastEditors: Yeung
- * @LastEditTime: 2021-02-08 00:21:01
+ * @LastEditTime: 2021-02-12 01:09:26
  * @Description: 后台管理系统页面的基本框架
 -->
 <template>
@@ -11,7 +11,12 @@
       width="200px"
       class="aside-container"
     >
-      <el-menu :default-openeds="['1']">
+      <el-menu
+        :default-openeds="['1']"
+        background-color="#545c64"
+        text-color="#fff"
+        active-text-color="#ffd04b"
+      >
         <el-submenu index="1">
           <template slot="title"><i class="el-icon-message"></i>导航一</template>
           <el-menu-item-group>
@@ -53,8 +58,8 @@
         </div>
         <el-dropdown>
           <div>
-            <span class="white">王小虎</span>
-            <em class="el-icon-caret-bottom white"></em>
+            <span>王小虎</span>
+            <em class="el-icon-caret-bottom"></em>
           </div>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>查看</el-dropdown-item>
@@ -64,7 +69,7 @@
         </el-dropdown>
       </el-header>
       <!-- 主要的内容展示区域 -->
-      <el-main>
+      <el-main class="main-container">
         <slot></slot>
       </el-main>
     </el-container>
@@ -75,17 +80,20 @@
 .main-container {
   height: 100%;
   .aside-container {
-    background-color: rgb(238, 241, 246);
+    background-color: rgba(#545c64, 0.9);
   }
   .head-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #409eff;
-    color: #fff;
+    // color: #fff;
+    background-color: @white;
+    position: relative;
+    z-index: 999;
   }
-}
-.white {
-  color: @white;
+  .main-container {
+    background-color: rgb(238, 241, 246);
+    padding: 20px;
+  }
 }
 </style>

@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-01-31 13:01:57
  * @LastEditors: Yeung
- * @LastEditTime: 2021-01-31 23:16:29
+ * @LastEditTime: 2021-02-13 01:14:18
  * @Description: 登录
 -->
 <template>
@@ -94,10 +94,10 @@ export default {
     verifyLogin() {
       this.$refs.login.validate(async (val) => {
         if (val) {
-          console.log(val);
+          console.log(this.$store);
           try {
-            const loginInfo = await this.$apis.login(this.form);
-            console.log(loginInfo);
+            let userInfo = await this.$store.dispatch("user/login", this.form);
+            console.log(userInfo);
           } catch (error) {
             console.log(error);
           }

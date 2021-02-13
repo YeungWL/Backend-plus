@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-01-31 13:05:46
  * @LastEditors: Yeung
- * @LastEditTime: 2021-02-01 23:30:34
+ * @LastEditTime: 2021-02-13 01:19:03
  * @Description: file content
  */
 import axios from 'axios'
@@ -29,7 +29,6 @@ instance.interceptors.request.use(
 // 响应拦截
 instance.interceptors.response.use(
   response => {
-    console.log(response);
     if (response.data.code === 200) { // 处理code=200的业务 代表请求成功
       return Promise.resolve(response.data.data);
     } else { // 处理code非200的业务 代表请求失败

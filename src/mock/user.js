@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-01-31 16:58:38
  * @LastEditors: Yeung
- * @LastEditTime: 2021-02-01 23:42:58
+ * @LastEditTime: 2021-02-13 01:23:31
  * @Description: 用户模块的mock数据
  */
 import Mock from 'mockjs'
@@ -27,6 +27,12 @@ export const userList = Mock.mock({
   ]
 })
 
+const userInfo = Mock.mock({
+  "userName": 'admin',
+  "id": 1,
+  "token": /[a-zA-Z0-9]{108}/,
+})
+
 Mock.mock('/user/login', 'post', (options) => {
   console.log(options);
   let res = {}
@@ -34,20 +40,36 @@ Mock.mock('/user/login', 'post', (options) => {
   if (params.account === 'admin' && params.password === '123456') {
     res = {
       code: 200,
-      data: {
-        'token': /[a-zA-Z]{26}/,
-        'userName': 'admin'
-      },
+      data: userInfo,
       message: '成功'
     }
   } else {
     res = {
       code: 300,
-      data: userList,
+      data: null,
       message: '账号或密码错误'
     }
   }
   return res
 })
 
+Mock.mock('/user/getMenu', 'post', (options) => {
+  console.log(options);
 
+  const list = [
+    {
+      id: 1000,
+      parentId: 0,
+      name: '主页',
+      icon: 'el-icon-s-home',
+      url: null
+    }, {
+      id: 1001,
+      parentId: 1000,
+      name: '首页',
+      icon: null,
+      url: '/home/index'
+    }
+  ]
+  return list
+})

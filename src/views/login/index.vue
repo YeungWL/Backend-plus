@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-01-31 13:01:57
  * @LastEditors: Yeung
- * @LastEditTime: 2021-02-13 01:14:18
+ * @LastEditTime: 2021-02-14 00:57:53
  * @Description: 登录
 -->
 <template>
@@ -98,6 +98,13 @@ export default {
           try {
             let userInfo = await this.$store.dispatch("user/login", this.form);
             console.log(userInfo);
+            // 路由跳转的两种写法
+            // 1 -- 传入对象方便传参数的写法
+            // this.$router.push({
+            //   path: "/home",
+            // });
+            // 2
+            this.$router.push("/home");
           } catch (error) {
             console.log(error);
           }

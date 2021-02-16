@@ -1,5 +1,11 @@
 # backend-plus
 
+## 项目运行需要node服务 打开两个命令行工具 分别执行以下命令
+```
+npm run mock     (运行node服务)
+npm run serve    (运行项目)
+```
+
 ## Project setup
 ```
 npm install

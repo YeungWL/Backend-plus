@@ -14,9 +14,7 @@ import Layout from "@/layouts/layout";
 export default {
   name: "App",
   components: { Layout },
-  created() {
-    console.log(this.$route);
-  },
+  created() {},
 };
 </script>
 

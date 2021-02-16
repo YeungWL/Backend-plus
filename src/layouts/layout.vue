@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-02-01 23:55:59
  * @LastEditors: Yeung
- * @LastEditTime: 2021-02-14 00:30:53
+ * @LastEditTime: 2021-02-16 01:08:39
  * @Description: 后台管理系统页面的基本框架
 -->
 <template>
@@ -20,19 +20,34 @@
         active-text-color="#ffd04b"
         class="aside-menu"
       >
-        <el-submenu index="1">
-          <template slot="title">
-            <i class="el-icon-message"></i>
-            <span>导航一</span>
-          </template>
-          <el-menu-item index="1-1">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
-          <el-menu-item index="1-3">选项3</el-menu-item>
-          <el-submenu index="1-4">
-            <template slot="title">选项4</template>
-            <el-menu-item index="1-4-1">选项4-1</el-menu-item>
+        <template v-for="(item) in userMenu">
+          <!-- 判断路由只有一层 -->
+          <el-menu-item
+            :index="item.id"
+            v-if="!item.children"
+            :key="item.id"
+          >
+            <i :class="item.icon || 'el-icon-folder'"></i>
+            <span>{{item.name}}</span>
+          </el-menu-item>
+          <!-- 判断路由为两层 -->
+          <el-submenu
+            :index="item.id"
+            :key="item.id"
+            v-if="item.children"
+          >
+            <template slot="title">
+              <i :class="item.icon"></i>
+              <span>{{ item.name }}</span>
+            </template>
+            <template v-for="(childItem, childIndex) in item.children">
+              <el-menu-item
+                :key="childIndex"
+                :index="childItem.id"
+              >{{childItem.name}}</el-menu-item>
+            </template>
           </el-submenu>
-        </el-submenu>
+        </template>
       </el-menu>
     </el-aside>
     <!-- 右则主要内容 -->
@@ -78,6 +93,7 @@ export default {
   computed: {
     ...mapGetters({
       userInfo: "user/userInfo",
+      userMenu: "user/getUserMenu",
       isCollapse: "app/isOpened",
     }),
     asideWidth() {
@@ -88,6 +104,10 @@ export default {
     handleToggle() {
       this.$store.dispatch("app/toggleSideBar");
     },
+  },
+  created() {
+    console.log(123);
+    this.$store.dispatch("user/getUserMenu");
   },
 };
 </script>

@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-01-31 16:58:38
  * @LastEditors: Yeung
- * @LastEditTime: 2021-02-17 00:20:42
+ * @LastEditTime: 2021-02-18 23:54:40
  * @Description: 用户模块的mock数据
  */
 let Mock = require('mockjs')
@@ -39,13 +39,31 @@ const userMenu = [
     parentId: 0,
     name: '主页',
     icon: 'el-icon-s-home',
-    url: null
+    url: '/home'
   }, {
     id: 1001,
     parentId: 1000,
     name: '首页',
     icon: null,
     url: '/home/index'
+  }, {
+    id: 2000,
+    parentId: 0,
+    name: '系统设置',
+    icon: 'el-icon-s-home',
+    url: '/system'
+  }, {
+    id: 2001,
+    parentId: 2000,
+    name: '用户列表',
+    icon: null,
+    url: '/user/list'
+  }, {
+    id: 2002,
+    parentId: 2000,
+    name: '资源列表',
+    icon: null,
+    url: '/resources/list'
   }
 ]
 module.exports.userInfo = userInfo

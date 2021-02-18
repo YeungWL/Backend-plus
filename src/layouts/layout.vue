@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-02-01 23:55:59
  * @LastEditors: Yeung
- * @LastEditTime: 2021-02-16 01:08:39
+ * @LastEditTime: 2021-02-19 00:14:29
  * @Description: 后台管理系统页面的基本框架
 -->
 <template>
@@ -15,15 +15,17 @@
         :collapse="isCollapse"
         :collapse-transition="false"
         :style="{ width: asideWidth }"
+        :default-active="$route.path"
         background-color="#545c64"
         text-color="#fff"
         active-text-color="#ffd04b"
         class="aside-menu"
+        @select="menuSelect"
       >
         <template v-for="(item) in userMenu">
           <!-- 判断路由只有一层 -->
           <el-menu-item
-            :index="item.id"
+            :index="item.url"
             v-if="!item.children"
             :key="item.id"
           >
@@ -32,7 +34,7 @@
           </el-menu-item>
           <!-- 判断路由为两层 -->
           <el-submenu
-            :index="item.id"
+            :index="item.url"
             :key="item.id"
             v-if="item.children"
           >
@@ -43,7 +45,7 @@
             <template v-for="(childItem, childIndex) in item.children">
               <el-menu-item
                 :key="childIndex"
-                :index="childItem.id"
+                :index="childItem.url"
               >{{childItem.name}}</el-menu-item>
             </template>
           </el-submenu>
@@ -101,12 +103,23 @@ export default {
     },
   },
   methods: {
+    /**
+     * @description: 导航菜单跳转
+     * @param {*} routePath
+     */
+    menuSelect(routePath) {
+      this.$router.push({
+        path: routePath,
+      });
+    },
+    /**
+     * @description: 导航菜单折叠方法
+     */
     handleToggle() {
       this.$store.dispatch("app/toggleSideBar");
     },
   },
   created() {
-    console.log(123);
     this.$store.dispatch("user/getUserMenu");
   },
 };

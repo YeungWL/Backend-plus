@@ -2,12 +2,12 @@
  * @Description: 公共的工具类
  * @Author: Yeung
  * @Date: 2021-02-15 23:40:49
- * @LastEditors: Yeung
- * @LastEditTime: 2021-02-15 23:46:03
+ * @LastEditors: ywl
+ * @LastEditTime: 2021-02-20 09:45:20
  */
 export class Tool {
   /**
-   * @description: 列表转分组
+   * @description: 列表转树形结构分组
    * @param {*} list
    * @param {*} config
    * @return {*} tree

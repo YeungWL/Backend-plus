@@ -1,9 +1,5 @@
-/*
- * @Description: 公共的工具类
- * @Author: Yeung
- * @Date: 2021-02-15 23:40:49
- * @LastEditors: ywl
- * @LastEditTime: 2021-02-20 09:45:20
+/**
+ * @description: 公共的工具类
  */
 export class Tool {
   /**
@@ -38,5 +34,29 @@ export class Tool {
       }
     }
     return tree;
+  }
+  /**
+   * @description: 复制文本
+   * @param {*} text 传入复制的内容
+   * @param {*} callback 复制完成后的回调函数
+   */
+  copyText(text, callback) {
+    let value = text.replace(/\s+/g, "");
+    let element = document.createElement("span");
+    element.textContent = value;
+    document.body.appendChild(element);
+    if (document.selection) {
+      let range = document.body.createTextRange();
+      range.moveToElementText(element);
+      range.select();
+    } else if (window.getSelection) {
+      let range = document.createRange();
+      range.selectNode(element);
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(range);
+    }
+    document.execCommand("Copy");
+    element.remove ? element.remove() : element.removeNode(true);
+    callback && callback();
   }
 }

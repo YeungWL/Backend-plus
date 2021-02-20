@@ -3,11 +3,11 @@
  * @Author: Yeung
  * @Date: 2021-01-31 17:54:07
  * @LastEditors: Yeung
- * @LastEditTime: 2021-02-17 00:48:59
+ * @LastEditTime: 2021-02-21 00:34:32
  */
 let express = require('express');
 let app = express();
-let { userInfo, userMenu } = require('./data/user')
+let { userInfo, userMenu, userList } = require('./data/user')
 
 /*post方法*/
 var bodyParser = require("body-parser");
@@ -29,6 +29,7 @@ app.use(function (req, res, next) {
   next();
 });
 
+// 用户登录
 app.post("/user/login", function (req, res) {
   console.log(req.body);
   let params = req.body;
@@ -41,9 +42,19 @@ app.post("/user/login", function (req, res) {
   }
 });
 
+// 获取用户的导航
 app.post('/user/getMenuById', function (req, res) {
   if (req.headers['xx-token'] === userInfo.token) {
     res.send({ code: 200, data: userMenu, message: 'success' })
+  } else {
+    res.send({ code: 401, data: null, message: 'token已失效' })
+  }
+})
+
+// 获取用户列表
+app.post('/user/getUserList', function (req, res) {
+  if (req.headers['xx-token'] === userInfo.token) {
+    res.send({ code: 200, data: userList, message: 'success' })
   } else {
     res.send({ code: 401, data: null, message: 'token已失效' })
   }

@@ -7,4 +7,5 @@
 - [√] BpPage组件(页面组件的容器, 以后可以统一修改) --- /components/BpPage
 - [√] 自动化导入全局组件(使用了require.context()) --- /plugins/component.js
 - [x] node+mock做请求服务(进行中) --- /mock/*
+- [x] 收录各种工具类(进行中) --- /utils/tool.js
 - [x] xxx

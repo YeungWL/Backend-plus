@@ -9,8 +9,8 @@ Vue.use(Vuex)
 let modules = {}
 modules.user = user
 modules.app = app
-// require
-//   .context('./modules', false, /.js$/)
+// require.context() webpack的方法, 跟自动导入全局组件一样
+// require.context('./modules', false, /.js$/)
 //   .keys()
 //   .forEach(i => {
 //     modules[i.substring(2, i.length - 3)] = require(`./modules/${i.substring(

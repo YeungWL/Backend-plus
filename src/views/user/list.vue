@@ -3,7 +3,7 @@
  * @Author: Yeung
  * @Date: 2021-02-19 00:00:09
  * @LastEditors: Yeung
- * @LastEditTime: 2021-02-19 00:36:42
+ * @LastEditTime: 2021-02-23 00:02:15
 -->
 <template>
   <BpPage>
@@ -32,7 +32,7 @@
           </el-col>
         </el-row>
       </el-form>
-      <div>
+      <div class="padding-left-20">
         <el-button type="primary">查询</el-button>
         <el-button type="info">重置</el-button>
       </div>
@@ -41,12 +41,34 @@
 </template>
 
 <script>
+// 导入分页mixin
+import pagination from "@/utils/pagination.js";
+
 export default {
   name: "userList",
+  mixins: [pagination],
   data() {
     return {
-      pageParams: {},
+      pageParams: {
+        account: "",
+      },
+      pageInfo: {
+        total: null,
+        list: [],
+      },
     };
+  },
+  methods: {
+    async getListMixin() {
+      try {
+        this.pageInfo = await this.$apis.getUserList(this.pageParams);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
+  mounted() {
+    this.getListMixin();
   },
 };
 </script>

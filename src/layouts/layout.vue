@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-02-01 23:55:59
- * @LastEditors: Yeung
- * @LastEditTime: 2021-02-19 00:14:29
+ * @LastEditors: ywl
+ * @LastEditTime: 2021-02-25 15:45:45
  * @Description: 后台管理系统页面的基本框架
 -->
 <template>
@@ -76,6 +76,9 @@
           </el-dropdown-menu>
         </el-dropdown>
       </el-header>
+      <div class="tags-container">
+        <TagsView :routes="userMenu" />
+      </div>
       <!-- 主要的内容展示区域 -->
       <el-main class="main-container">
         <slot></slot>
@@ -85,10 +88,12 @@
 </template>
 
 <script>
+import TagsView from "./components/TagsView/index";
 import { mapGetters } from "vuex";
 
 export default {
   name: "Layout",
+  components: { TagsView },
   data() {
     return {};
   },
@@ -134,16 +139,20 @@ export default {
     overflow: hidden;
   }
   .head-container {
+    position: relative;
+    z-index: 999;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    // color: #fff;
     background-color: @white;
-    position: relative;
-    z-index: 999;
+    box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
     .el-icon-s-fold.active {
       transform: rotate(180deg);
     }
+  }
+  .tags-container {
+    position: relative;
+    z-index: 999;
   }
   .main-container {
     background-color: rgb(238, 241, 246);

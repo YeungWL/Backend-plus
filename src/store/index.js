@@ -1,23 +1,23 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import user from './modules/user'
-import app from './modules/app'
+// import user from './modules/user'
+// import app from './modules/app'
 
 Vue.use(Vuex)
 
 let modules = {}
-modules.user = user
-modules.app = app
+// modules.user = user
+// modules.app = app
 // require.context() webpack的方法, 跟自动导入全局组件一样
-// require.context('./modules', false, /.js$/)
-//   .keys()
-//   .forEach(i => {
-//     modules[i.substring(2, i.length - 3)] = require(`./modules/${i.substring(
-//       2,
-//       i.length
-//     )}`).default
-//   })
+require.context('./modules', false, /.js$/)
+  .keys()
+  .forEach(i => {
+    modules[i.substring(2, i.length - 3)] = require(`./modules/${i.substring(
+      2,
+      i.length
+    )}`).default
+  })
 
 export default new Vuex.Store({
   modules,

@@ -2,8 +2,8 @@
  * @Description: 用户列表
  * @Author: Yeung
  * @Date: 2021-02-19 00:00:09
- * @LastEditors: Yeung
- * @LastEditTime: 2021-02-23 00:02:15
+ * @LastEditors: ywl
+ * @LastEditTime: 2021-02-23 15:02:09
 -->
 <template>
   <BpPage>
@@ -32,7 +32,7 @@
           </el-col>
         </el-row>
       </el-form>
-      <div class="padding-left-20">
+      <div class="padding-left-90">
         <el-button type="primary">查询</el-button>
         <el-button type="info">重置</el-button>
       </div>

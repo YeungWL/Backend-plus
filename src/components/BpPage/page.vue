@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-02-12 00:52:35
- * @LastEditors: Yeung
- * @LastEditTime: 2021-02-17 23:32:30
+ * @LastEditors: ywl
+ * @LastEditTime: 2021-02-25 17:00:01
  * @Description: 页面容器
 -->
 <template>
@@ -25,7 +25,7 @@ export default {
     minHeight() {
       let h =
         (document.documentElement.clientHeight || document.body.clientHeight) -
-        90 +
+        124 +
         "px";
       return h;
     },

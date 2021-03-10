@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-01-31 16:58:38
- * @LastEditors: Yeung
- * @LastEditTime: 2021-02-18 23:54:40
+ * @LastEditors: ywl
+ * @LastEditTime: 2021-03-10 11:26:10
  * @Description: 用户模块的mock数据
  */
 let Mock = require('mockjs')
@@ -10,6 +10,8 @@ let Mock = require('mockjs')
 
 const userList = Mock.mock({
   "total": 75,
+  "pageNum": 1,
+  "pageSize": 10,
   "list|10": [
     {
       "code": /[a-z]{8}/,

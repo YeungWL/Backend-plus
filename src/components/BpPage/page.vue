@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-02-12 00:52:35
  * @LastEditors: ywl
- * @LastEditTime: 2021-02-25 17:00:01
+ * @LastEditTime: 2021-03-10 11:18:39
  * @Description: 页面容器
 -->
 <template>
@@ -13,7 +13,10 @@
       <slot name="search"></slot>
     </div>
     <div class="info">
-      <slot></slot>
+      <slot name="info"></slot>
+    </div>
+    <div class="pagination">
+      <slot name="pagination"></slot>
     </div>
   </div>
 </template>
@@ -37,5 +40,9 @@ export default {
 .page-container {
   padding: 10px;
   background-color: @white;
+  .pagination {
+    text-align: right;
+    margin-top: 16px;
+  }
 }
 </style>

@@ -3,7 +3,7 @@
  * @Author: Yeung
  * @Date: 2021-02-19 00:00:09
  * @LastEditors: ywl
- * @LastEditTime: 2021-03-10 11:45:12
+ * @LastEditTime: 2021-03-10 14:40:21
 -->
 <template>
   <BpPage>
@@ -17,24 +17,30 @@
           </el-col>
           <el-col :span="6">
             <el-form-item label="手机号">
-              <el-input v-model="pageParams.account"></el-input>
+              <el-input v-model="pageParams.phone"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="6">
             <el-form-item label="姓名">
-              <el-input v-model="pageParams.account"></el-input>
+              <el-input v-model="pageParams.name"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="6">
             <el-form-item label="账号类型">
-              <el-input v-model="pageParams.account"></el-input>
+              <el-input v-model="pageParams.userType"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
       </el-form>
       <div class="padding-left-90 margin-bottom-20">
-        <el-button type="primary">查询</el-button>
-        <el-button type="info">重置</el-button>
+        <el-button
+          type="primary"
+          @click="search()"
+        >查询</el-button>
+        <el-button
+          type="info"
+          @click="reset()"
+        >重置</el-button>
       </div>
     </template>
     <template #info>
@@ -63,6 +69,7 @@
         <el-table-column
           label="公司组织"
           prop="organization"
+          min-width="135"
         ></el-table-column>
         <el-table-column
           label="修改人"
@@ -73,6 +80,27 @@
           prop="updateTime"
           width="155"
         ></el-table-column>
+        <el-table-column
+          fixed="right"
+          width="220"
+          label="操作"
+        >
+          <template v-slot="{ row }">
+            <el-button
+              size="mini"
+              type="success"
+            >详情</el-button>
+            <el-button
+              size="mini"
+              type="primary"
+            >修改</el-button>
+            <el-button
+              size="mini"
+              type="danger"
+              @click="remove(row)"
+            >删除</el-button>
+          </template>
+        </el-table-column>
       </el-table>
     </template>
     <template #pagination>
@@ -100,6 +128,9 @@ export default {
     return {
       pageParams: {
         account: "",
+        phone: "",
+        name: "",
+        userType: "",
       },
       pageInfo: {
         total: null,
@@ -108,6 +139,19 @@ export default {
     };
   },
   methods: {
+    search() {
+      this.pageParams.pageNum = 1;
+      this.getListMixin();
+    },
+    reset() {
+      Object.assign(this.pageParams, {
+        account: "",
+        phone: "",
+        name: "",
+        userType: "",
+      });
+    },
+    remove() {},
     async getListMixin() {
       try {
         this.pageInfo = await this.$apis.getUserList(this.pageParams);

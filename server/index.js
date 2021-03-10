@@ -1,15 +1,16 @@
 /*
- * @Description: mock后端服务
- * @Author: Yeung
- * @Date: 2021-01-31 17:54:07
- * @LastEditors: Yeung
- * @LastEditTime: 2021-02-21 00:34:32
+ * @Description: file content
+ * @version:
+ * @Author: ywl
+ * @Date: 2021-03-09 11:45:25
+ * @LastEditors: ywl
+ * @LastEditTime: 2021-03-10 16:36:29
  */
 let express = require('express');
 let app = express();
-let { userInfo, userMenu, userList } = require('./data/user')
+let { userInfo, userMenu } = require('./server/user');
+const { getUserList } = require('./server/userServe')
 
-/*post方法*/
 var bodyParser = require("body-parser");
 app.use(bodyParser.json()); // 添加json解析
 app.use(
@@ -53,11 +54,14 @@ app.post('/user/getMenuById', function (req, res) {
 
 // 获取用户列表
 app.post('/user/getUserList', function (req, res) {
-  if (req.headers['xx-token'] === userInfo.token) {
-    res.send({ code: 200, data: userList, message: 'success' })
-  } else {
-    res.send({ code: 401, data: null, message: 'token已失效' })
-  }
+  // if (req.headers['xx-token'] === userInfo.token) {
+  console.log(req.body);
+  const params = req.body
+  let data = getUserList(params.pageNum - 1, params.pageSize)
+  res.send({ code: 200, data, message: 'success' })
+  // } else {
+  //   res.send({ code: 401, data: null, message: 'token已失效' })
+  // }
 })
 
 app.listen("3000", function () {

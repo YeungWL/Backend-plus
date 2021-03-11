@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-02-12 00:52:35
  * @LastEditors: ywl
- * @LastEditTime: 2021-03-10 11:18:39
+ * @LastEditTime: 2021-03-11 15:58:13
  * @Description: 页面容器
 -->
 <template>
@@ -18,12 +18,13 @@
     <div class="pagination">
       <slot name="pagination"></slot>
     </div>
+    <slot />
   </div>
 </template>
 
 <script>
 export default {
-  name: "my-page",
+  name: "bp-page",
   computed: {
     minHeight() {
       let h =

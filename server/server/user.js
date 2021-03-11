@@ -1,11 +1,10 @@
 /*
  * @Date: 2021-01-31 16:58:38
  * @LastEditors: ywl
- * @LastEditTime: 2021-03-10 16:37:49
+ * @LastEditTime: 2021-03-10 17:11:07
  * @Description: 用户模块的mock数据
  */
-let Mock = require('mockjs')
-let fs = require('fs');
+let Mock = require('mockjs');
 
 // const Random = Mock.Random
 

@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-01-31 17:37:32
- * @LastEditors: Yeung
- * @LastEditTime: 2021-02-21 00:39:18
+ * @LastEditors: ywl
+ * @LastEditTime: 2021-03-11 09:40:23
  * @Description: 用户管理
  */
 import http from '@/plugins/axios'
@@ -11,9 +11,12 @@ export default {
     return http.post('/user/login', data)
   },
   getUserMenu: (data) => {
-    return http.post('/user/getMenuById', data)
+    return http.get('/user/getMenuById', { params: data })
   },
   getUserList: (data) => {
     return http.post('/user/getUserList', data)
+  },
+  addUserInfo: (data) => {
+    return http.post('/user/add', data)
   }
 }

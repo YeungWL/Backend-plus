@@ -4,12 +4,12 @@
  * @Author: ywl
  * @Date: 2021-03-09 11:45:25
  * @LastEditors: ywl
- * @LastEditTime: 2021-03-10 16:36:29
+ * @LastEditTime: 2021-03-11 17:16:22
  */
 let express = require('express');
 let app = express();
 let { userInfo, userMenu } = require('./server/user');
-const { getUserList } = require('./server/userServe')
+const { getUserList, addUser } = require('./server/userServe');
 
 var bodyParser = require("body-parser");
 app.use(bodyParser.json()); // 添加json解析
@@ -44,7 +44,7 @@ app.post("/user/login", function (req, res) {
 });
 
 // 获取用户的导航
-app.post('/user/getMenuById', function (req, res) {
+app.get('/user/getMenuById', function (req, res) {
   if (req.headers['xx-token'] === userInfo.token) {
     res.send({ code: 200, data: userMenu, message: 'success' })
   } else {
@@ -53,17 +53,30 @@ app.post('/user/getMenuById', function (req, res) {
 })
 
 // 获取用户列表
-app.post('/user/getUserList', function (req, res) {
-  // if (req.headers['xx-token'] === userInfo.token) {
-  console.log(req.body);
+app.post('/user/list', function (req, res) {
   const params = req.body
-  let data = getUserList(params.pageNum - 1, params.pageSize)
-  res.send({ code: 200, data, message: 'success' })
-  // } else {
-  //   res.send({ code: 401, data: null, message: 'token已失效' })
-  // }
+  if (req.headers['xx-token'] === userInfo.token && params.pageNum && params.pageSize) {
+    let data = getUserList(params.pageNum - 1, (params.pageSize || 10))
+    res.send({ code: 200, data, message: 'success' })
+  } else if (!params.pageNum || !params.pageSize) {
+    res.send({ code: 300, data: null, message: '页码不能为空' })
+  } else {
+    res.send({ code: 401, data: null, message: 'token已失效' })
+  }
+})
+
+// 新增用户信息
+app.post('/user/add', function (req, res) {
+  const params = req.body
+  if (req.headers['xx-token'] === userInfo.token) {
+    addUser(params)
+    res.send({ code: 200, data: null, message: 'success' })
+  } else {
+    res.send({ code: 401, data: null, message: 'token已失效' })
+  }
 })
 
 app.listen("3000", function () {
-  console.log("\033[2J\033[42;30m DONE \033[40;32m app listening at http://localhost:3000\033[0m")
+  console.log("\033[2J\033[42;30m DONE \033[40;32m app listening at http://localhost:3000\033[0m");
+  console.log("node服务已启动")
 });

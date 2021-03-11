@@ -3,7 +3,7 @@
  * @Author: Yeung
  * @Date: 2021-02-19 00:00:09
  * @LastEditors: ywl
- * @LastEditTime: 2021-03-10 14:40:21
+ * @LastEditTime: 2021-03-11 17:13:11
 -->
 <template>
   <BpPage>
@@ -41,6 +41,10 @@
           type="info"
           @click="reset()"
         >重置</el-button>
+        <el-button
+          type="success"
+          @click="addVisible = true"
+        >添加</el-button>
       </div>
     </template>
     <template #info>
@@ -114,15 +118,27 @@
         :total="pageInfo.total"
       ></el-pagination>
     </template>
+    <!-- 弹窗 -->
+    <BpDialog :is-show="addVisible">
+      <UserPopup
+        @cancel="() => (addVisible = false)"
+        @finish="() => {
+          addVisible = false;
+          search();
+        }"
+      />
+    </BpDialog>
   </BpPage>
 </template>
 
 <script>
 // 导入分页mixin
 import pagination from "@/utils/pagination.js";
+import UserPopup from "./dialog/userPopup";
 
 export default {
   name: "userList",
+  components: { UserPopup },
   mixins: [pagination],
   data() {
     return {
@@ -136,6 +152,7 @@ export default {
         total: null,
         list: [],
       },
+      addVisible: false,
     };
   },
   methods: {

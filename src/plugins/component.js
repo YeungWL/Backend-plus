@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-02-12 00:37:26
- * @LastEditors: Yeung
- * @LastEditTime: 2021-02-17 23:42:37
+ * @LastEditors: ywl
+ * @LastEditTime: 2021-03-11 16:57:47
  * @Description: 组册全局的组件 -- 以后换成自动化导入组件
  */
 import Vue from 'vue'

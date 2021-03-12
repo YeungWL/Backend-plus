@@ -3,7 +3,7 @@
  * @Author: Yeung
  * @Date: 2021-02-21 00:50:06
  * @LastEditors: ywl
- * @LastEditTime: 2021-03-10 11:23:25
+ * @LastEditTime: 2021-03-12 17:22:35
  */
 let pagination = {
   data() {
@@ -11,6 +11,10 @@ let pagination = {
       pageParams: {
         pageSize: 10,
         pageNum: 1
+      },
+      pageInfo: {
+        total: null,
+        list: [],
       },
       pageSizes: [10, 20, 50, 100],
       pageLayout: 'total, sizes, prev, pager, next, jumper'
@@ -26,6 +30,14 @@ let pagination = {
       this.getListMixin();
     },
     handleCurrentChangeMixin() {
+      this.getListMixin()
+    },
+    removeMixin() {
+      if (this.pageInfo.list.length === 1) {
+        this.pageParams.pageNum === 1
+          ? (this.pageParams.pageNum = 1)
+          : this.pageParams.pageNum--;
+      }
       this.getListMixin()
     }
   },

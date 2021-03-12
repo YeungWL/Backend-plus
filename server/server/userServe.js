@@ -3,7 +3,7 @@
  * @Author: ywl
  * @Date: 2021-03-10 16:24:44
  * @LastEditors: ywl
- * @LastEditTime: 2021-03-11 10:04:55
+ * @LastEditTime: 2021-03-12 15:59:24
  */
 const Tool = require('../utils/tool');
 const sd = require('silly-datetime');
@@ -25,5 +25,20 @@ const addUser = function (data) {
   return tool.addData(addData, './data/user.json');
 }
 
+const editUser = function (data) {
+  let editData = {
+    ...data,
+    updateUser: 'admin',
+    updateTime: sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss')
+  };
+  return tool.changeData(data.id, editData, './data/user.json');
+}
+
+const delUser = function (id) {
+  return tool.delData(id, './data/user.json');
+}
+
 module.exports.getUserList = getUserList
 module.exports.addUser = addUser
+module.exports.editUser = editUser
+module.exports.delUser = delUser

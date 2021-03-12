@@ -3,7 +3,7 @@
  * @Author: ywl
  * @Date: 2021-03-11 11:17:18
  * @LastEditors: ywl
- * @LastEditTime: 2021-03-11 17:12:04
+ * @LastEditTime: 2021-03-12 14:40:07
 -->
 <template>
   <el-dialog
@@ -85,6 +85,10 @@ export default {
       type: Boolean,
       default: true,
     },
+    data: {
+      type: Object,
+      default: () => ({}),
+    },
   },
   data() {
     return {
@@ -124,12 +128,21 @@ export default {
             await this.$apis.addUserInfo(this.form);
             this.$message.success("添加成功");
             this.$emit("finish");
+          } else {
+            await this.$apis.editUser(this.form);
+            this.$message.success("修改成功");
+            this.$emit("finish");
           }
         } else {
           return false;
         }
       });
     },
+  },
+  created() {
+    if (!this.isAdd) {
+      this.form = this.data;
+    }
   },
 };
 </script>

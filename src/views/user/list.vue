@@ -3,7 +3,7 @@
  * @Author: Yeung
  * @Date: 2021-02-19 00:00:09
  * @LastEditors: ywl
- * @LastEditTime: 2021-03-11 17:13:11
+ * @LastEditTime: 2021-03-12 17:21:51
 -->
 <template>
   <BpPage>
@@ -43,7 +43,7 @@
         >重置</el-button>
         <el-button
           type="success"
-          @click="addVisible = true"
+          @click="handleAdd()"
         >添加</el-button>
       </div>
     </template>
@@ -97,6 +97,7 @@
             <el-button
               size="mini"
               type="primary"
+              @click="handleEdit(row)"
             >修改</el-button>
             <el-button
               size="mini"
@@ -121,6 +122,8 @@
     <!-- 弹窗 -->
     <BpDialog :is-show="addVisible">
       <UserPopup
+        :data="tableData"
+        :isAdd="isAdd"
         @cancel="() => (addVisible = false)"
         @finish="() => {
           addVisible = false;
@@ -153,6 +156,8 @@ export default {
         list: [],
       },
       addVisible: false,
+      isAdd: true,
+      tableData: null,
     };
   },
   methods: {
@@ -168,7 +173,25 @@ export default {
         userType: "",
       });
     },
-    remove() {},
+    async remove(row) {
+      try {
+        await this.$confirm("是否确认删除?", "提示");
+        await this.$apis.delUser({ id: row.id });
+        this.$message.success("删除成功");
+        this.removeMixin();
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    handleEdit(row) {
+      this.isAdd = false;
+      this.addVisible = true;
+      this.tableData = { ...row };
+    },
+    handleAdd() {
+      this.isAdd = true;
+      this.addVisible = true;
+    },
     async getListMixin() {
       try {
         this.pageInfo = await this.$apis.getUserList(this.pageParams);

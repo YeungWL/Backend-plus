@@ -4,12 +4,12 @@
  * @Author: ywl
  * @Date: 2021-03-09 11:45:25
  * @LastEditors: ywl
- * @LastEditTime: 2021-03-11 17:16:22
+ * @LastEditTime: 2021-03-12 17:27:54
  */
 let express = require('express');
 let app = express();
 let { userInfo, userMenu } = require('./server/user');
-const { getUserList, addUser } = require('./server/userServe');
+const { getUserList, addUser, editUser, delUser } = require('./server/userServe');
 
 var bodyParser = require("body-parser");
 app.use(bodyParser.json()); // 添加json解析
@@ -70,6 +70,26 @@ app.post('/user/add', function (req, res) {
   const params = req.body
   if (req.headers['xx-token'] === userInfo.token) {
     addUser(params)
+    res.send({ code: 200, data: null, message: 'success' })
+  } else {
+    res.send({ code: 401, data: null, message: 'token已失效' })
+  }
+})
+
+app.put('/user/edit', function (req, res) {
+  const params = req.body;
+  if (req.headers['xx-token'] === userInfo.token) {
+    editUser(params)
+    res.send({ code: 200, data: null, message: 'success' })
+  } else {
+    res.send({ code: 401, data: null, message: 'token已失效' })
+  }
+})
+
+app.delete('/user/del/:id', function (req, res) {
+  if (req.headers['xx-token'] === userInfo.token) {
+    let id = parseInt(req.params.id)
+    delUser(id)
     res.send({ code: 200, data: null, message: 'success' })
   } else {
     res.send({ code: 401, data: null, message: 'token已失效' })

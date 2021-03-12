@@ -3,7 +3,7 @@
  * @Author: ywl
  * @Date: 2021-03-10 16:21:50
  * @LastEditors: ywl
- * @LastEditTime: 2021-03-11 09:48:11
+ * @LastEditTime: 2021-03-12 17:28:35
  */
 let fs = require('fs');
 class Tool {
@@ -49,6 +49,58 @@ class Tool {
           console.error(err);
         }
         console.log('----------写入成功-------------');
+      })
+    })
+  }
+  /**
+   * @description: 修改数据
+   * @param {*} id
+   * @param {*} params
+   * @param {*} src
+   */
+  changeData(id, params, src) {
+    fs.readFile(src, function (err, data) {
+      if (err) {
+        console.error(err);
+      }
+      let person = data.toString();
+      person = JSON.parse(person);
+      person.data.forEach((i) => {
+        if (i.id === id) {
+          for (let key in i) {
+            if (params[key]) {
+              i[key] = params[key];
+            }
+          }
+        }
+      })
+      let writeStr = JSON.stringify(person);
+      fs.writeFile(src, writeStr, function (err) {
+        if (err) {
+          console.error(err);
+        }
+        console.log('----------修改成功-------------');
+      })
+    })
+  }
+  delData(id, src) {
+    fs.readFile(src, function (err, data) {
+      if (err) {
+        console.error(err);
+      }
+      let person = data.toString();
+      person = JSON.parse(person);
+      person.data.forEach((i, n) => {
+        if (i.id === id) {
+          person.data.splice(n, 1);
+        }
+      })
+      let writeStr = JSON.stringify(person);
+      fs.writeFile(src, writeStr, function (err) {
+        if (err) {
+          console.error(err);
+        }
+        console.log('---------删除写入成功-------------');
       })
     })
   }

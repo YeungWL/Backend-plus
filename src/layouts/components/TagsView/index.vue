@@ -32,20 +32,20 @@
       :style="{left:left+'px',top:top+'px'}"
       class="contextmenu"
     >
-      <li @click="refreshSelectedTag(selectedTag)">Refresh</li>
+      <li @click="refreshSelectedTag(selectedTag)">刷新</li>
       <li
         v-if="!isAffix(selectedTag)"
         @click="closeSelectedTag(selectedTag)"
-      >Close</li>
-      <li @click="closeOthersTags">Close Others</li>
-      <li @click="closeAllTags(selectedTag)">Close All</li>
+      >关闭</li>
+      <li @click="closeOthersTags">关闭其他</li>
+      <li @click="closeAllTags(selectedTag)">全部关闭</li>
     </ul>
   </div>
 </template>
 
 <script>
 import ScrollPane from "./ScrollPane";
-import { path } from "path";
+import path from "path";
 import { mapGetters } from "vuex";
 
 export default {
@@ -96,11 +96,13 @@ export default {
     isAffix(tag) {
       return tag.meta && tag.meta.affix;
     },
-    filterAffixTags(routes, basePath = "/") {
+    filterAffixTags(routes, basePath = "/home") {
       let tags = [];
+      console.log(routes);
       routes.forEach((route) => {
         if (route.meta && route.meta.affix) {
           const tagPath = path.resolve(basePath, route.path);
+          console.log(tagPath, route.path, "tagPath");
           tags.push({
             fullPath: tagPath,
             path: tagPath,
@@ -118,6 +120,7 @@ export default {
       return tags;
     },
     initTags() {
+      console.log(this.routes, 123);
       const affixTags = (this.affixTags = this.filterAffixTags(this.routes));
       for (const tag of affixTags) {
         // Must have tag name

@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-02-01 23:55:59
  * @LastEditors: ywl
- * @LastEditTime: 2021-02-25 15:45:45
+ * @LastEditTime: 2021-03-23 15:10:53
  * @Description: 后台管理系统页面的基本框架
 -->
 <template>
@@ -77,7 +77,7 @@
         </el-dropdown>
       </el-header>
       <div class="tags-container">
-        <TagsView :routes="userMenu" />
+        <TagsView :routes="routers" />
       </div>
       <!-- 主要的内容展示区域 -->
       <el-main class="main-container">
@@ -89,13 +89,16 @@
 
 <script>
 import TagsView from "./components/TagsView/index";
+import routers from "../router/index";
 import { mapGetters } from "vuex";
 
 export default {
   name: "Layout",
   components: { TagsView },
   data() {
-    return {};
+    return {
+      routers: [],
+    };
   },
   computed: {
     ...mapGetters({
@@ -126,6 +129,8 @@ export default {
   },
   created() {
     this.$store.dispatch("user/getUserMenu");
+    this.routers = routers.options.routes;
+    console.log(routers.options.routes, "routers");
   },
 };
 </script>
